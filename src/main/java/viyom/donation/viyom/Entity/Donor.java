@@ -54,7 +54,9 @@ public class Donor {
     @OneToMany(mappedBy = "donor")
     private List<DonorAllocationShare> allocationShares;
 
-     @OneToOne
-    @JoinColumn(name = "auth_user_id", nullable = false)
+     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "auth_user_id", nullable = false, unique = true)
     private AuthUser authUser;
+
+     
 }

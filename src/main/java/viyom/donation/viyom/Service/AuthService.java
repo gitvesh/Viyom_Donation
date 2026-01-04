@@ -2,6 +2,7 @@ package viyom.donation.viyom.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import viyom.donation.viyom.Repository.DonorRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,9 +20,13 @@ import viyom.donation.viyom.Exception.EmailAlreadyExistsException;
 import viyom.donation.viyom.Exception.InvalidCredentialsException;
 import viyom.donation.viyom.Exception.UserNotEnabledException;
 import viyom.donation.viyom.Repository.AuthUserRepository;
+import viyom.donation.viyom.Entity.Donor;
 
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 @Slf4j
 @Service
@@ -31,47 +36,71 @@ public class AuthService {
     private static final String ROLE_PREFIX = "ROLE_";
 
     private final AuthUserRepository userRepository;
+    private final DonorRepository donorRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
 
     @Transactional
     public void register(RegisterRequest request) {
-        // Validate request
+
+        // 1️⃣ Validate request
         if (request == null || request.getEmail() == null || request.getPassword() == null) {
             throw new IllegalArgumentException("Registration request cannot be null");
         }
 
-        // Check if user already exists
-        if (userRepository.existsByEmail(request.getEmail())) {
-            log.warn("Registration attempt with existing email: {}", request.getEmail());
+        String email = request.getEmail().toLowerCase().trim();
+
+        // 2️⃣ Check if user already exists
+        if (userRepository.existsByEmail(email)) {
+            log.warn("Registration attempt with existing email: {}", email);
             throw new EmailAlreadyExistsException("Email already in use");
         }
 
-        // Normalize and validate role
+        // 3️⃣ Normalize and validate role
         String role = request.getRole() != null ? request.getRole().toUpperCase() : "DONOR";
         if (role.startsWith("ROLE_")) {
             role = role.substring(5);
         }
         if (!role.equals("ADMIN") && !role.equals("DONOR")) {
-            role = "DONOR"; // Default to DONOR if invalid role provided
+            role = "DONOR";
         }
 
-        // Create and save new user
+        // 4️⃣ Create AuthUser
         AuthUser user = new AuthUser();
-        user.setEmail(request.getEmail().toLowerCase().trim());
+        user.setEmail(email);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole(ROLE_PREFIX + role);
+        user.setRole("ROLE_" + role);
         user.setEnabled(true);
 
         try {
+            // 5️⃣ Save AuthUser
             userRepository.save(user);
-            log.info("User registered successfully: {}", user.getEmail());
+
+            // 6️⃣ Auto-create Donor for DONOR role
+            if ("DONOR".equals(role)) {
+
+                Donor donor = new Donor();
+                donor.setAuthUser(user);                     // 🔥 mandatory FK
+                donor.setFullName(email);                    // temp default
+                donor.setEmail(email);
+                donor.setPhoneNumber("NA");
+                donor.setPanNumber("TEMP-PAN-" + user.getId());
+                donor.setAnonymous(false);
+                donor.setActive(true);
+                donor.setCreatedAt(LocalDateTime.now());
+
+                donorRepository.save(donor);
+            }
+
+            log.info("User registered successfully: {}", email);
+
         } catch (Exception e) {
-            log.error("Error registering user: {}", e.getMessage());
+            log.error("Error registering user: {}", e.getMessage(), e);
             throw new RuntimeException("Error registering user", e);
         }
     }
+
 
     @Transactional(readOnly = true)
     public JwtResponse login(LoginRequest request) {
@@ -117,6 +146,15 @@ public class AuthService {
             log.error("Login error for user {}: {}", request.getEmail(), e.getMessage());
             throw new RuntimeException("Login failed. Please try again later.");
         }
+    }
+
+    @Transactional(readOnly = true)
+    public Donor findDonorByAuthUser(AuthUser authUser) {
+        if (authUser == null) {
+            throw new IllegalArgumentException("AuthUser cannot be null.");
+        }
+        return donorRepository.findByAuthUser(authUser)
+                .orElseThrow(() -> new RuntimeException("Donor profile not found for user: " + authUser.getEmail()));
     }
 
     @Transactional(readOnly = true)

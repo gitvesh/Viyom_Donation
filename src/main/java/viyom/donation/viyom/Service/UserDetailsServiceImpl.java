@@ -12,7 +12,7 @@ import viyom.donation.viyom.Repository.AuthUserRepository;
 
 import java.util.Collections;
 
-@Service
+@Service("appUserDetailsService")
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 

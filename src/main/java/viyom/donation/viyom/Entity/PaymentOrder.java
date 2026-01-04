@@ -45,6 +45,11 @@ public class PaymentOrder {
     @JoinColumn(name = "donor_id", nullable = false)
     private Donor donor;
 
+    // Many PaymentOrders → One DonationPool
+    @ManyToOne
+    @JoinColumn(name = "pool_id", nullable = false)
+    private DonationPool donationPool;
+
     // One PaymentOrder → One Donation
     @OneToOne(mappedBy = "paymentOrder")
     private Donation donation;
