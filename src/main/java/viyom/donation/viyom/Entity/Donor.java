@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -54,9 +55,8 @@ public class Donor {
     @OneToMany(mappedBy = "donor")
     private List<DonorAllocationShare> allocationShares;
 
-     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "auth_user_id", nullable = false, unique = true)
+    @ManyToOne
+    @JoinColumn(name = "auth_user_id", nullable = false)
     private AuthUser authUser;
-
      
 }

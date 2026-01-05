@@ -11,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -70,5 +71,13 @@ public class AuthUser implements UserDetails {
     public boolean isEnabled() {
         return this.enabled;
     }
+
+    @OneToMany(
+            mappedBy = "authUser",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Donor> donors = new ArrayList<>();
+
 }
 

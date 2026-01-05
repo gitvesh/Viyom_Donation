@@ -10,6 +10,8 @@ import viyom.donation.viyom.Entity.*;
 import viyom.donation.viyom.Repository.DonationRepository;
 import viyom.donation.viyom.Repository.PaymentOrderRepository;
 import viyom.donation.viyom.Repository.PaymentTransactionRepository;
+import viyom.donation.viyom.dto.CreatePaymentOrderRequest;
+import viyom.donation.viyom.dto.CreatePaymentOrderResponse;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -120,5 +122,9 @@ public class PaymentService {
             hexString.append(hex);
         }
         return hexString.toString();
+    }
+
+    public CreatePaymentOrderResponse createOrder(CreatePaymentOrderRequest request, Donor donor) {
+        return null;
     }
 }
