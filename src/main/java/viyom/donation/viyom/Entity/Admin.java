@@ -44,7 +44,7 @@ public class Admin {
 
     // Many Admins → One Organization
     @ManyToOne
-    @JoinColumn(name = "organization_id", nullable = false)
+    @JoinColumn(name = "organization_id")
     private Organization organization;
 
     // One Admin → Many Fund Allocations
@@ -55,11 +55,8 @@ public class Admin {
     @OneToMany(mappedBy = "generatedBy")
     private List<Report> reports;
 
-    // One Admin → Many Audit Logs
-    @OneToMany(mappedBy = "admin")
-    private List<AuditLog> auditLogs;
-
-      @OneToOne
-    @JoinColumn(name = "auth_user_id", nullable = false)
+    // One Admin → One AuthUser
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "auth_user_id", nullable = false, unique = true)
     private AuthUser authUser;
 }

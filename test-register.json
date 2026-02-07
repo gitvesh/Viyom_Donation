@@ -1,0 +1,6 @@
+{
+  "name": "Test Admin",
+  "email": "testadmin@viyom.com",
+  "password": "testpass123",
+  "role": "ADMIN"
+}

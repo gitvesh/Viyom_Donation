@@ -34,7 +34,9 @@ public class JwtService {
 
     public String generateToken(String username, String role) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("role", role);
+        // Ensure role is prefixed with ROLE_ if not already
+        String roleName = role.startsWith("ROLE_") ? role : "ROLE_" + role;
+        claims.put("role", roleName);
         
         return Jwts.builder()
                 .setClaims(claims)

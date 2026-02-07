@@ -1,0 +1,204 @@
+{
+  "info": {
+    "name": "Viyom Donation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "a1b2c3d4-e5f6-7890-1234-56789abcdef0",
+    "description": "Complete API collection for Viyom Donation Platform"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\",\n  \"fullName\": \"John Doe\",\n  \"phoneNumber\": \"+919876543210\",\n  \"role\": \"DONOR\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "register"]
+            },
+            "description": "Register a new user (DONOR or ADMIN)"
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            },
+            "description": "Authenticate user and get JWT token"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Fund Management",
+      "item": [
+        {
+          "name": "Get All Donation Pools",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/funds/pools",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "funds", "pools"]
+            },
+            "description": "Get list of all donation pools (Admin only)"
+          }
+        },
+        {
+          "name": "Get Pool Allocations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/funds/allocations/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "funds", "allocations", "1"]
+            },
+            "description": "Get allocations for a specific pool (Admin only)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Donor - Donations",
+      "item": [
+        {
+          "name": "Make a Donation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{donorToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 1000.00,\n  \"currency\": \"INR\",\n  \"poolId\": 1,\n  \"isAnonymous\": false,\n  \"panNumber\": \"ABCDE1234F\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/donations",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "donations"]
+            },
+            "description": "Create a new donation"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Public - Campaigns",
+      "item": [
+        {
+          "name": "Get Active Campaigns",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/campaigns/active",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "campaigns", "active"]
+            },
+            "description": "Get list of all active campaigns"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string",
+      "description": "Base URL of the API"
+    },
+    {
+      "key": "adminToken",
+      "value": "",
+      "type": "string",
+      "description": "JWT token for admin user"
+    },
+    {
+      "key": "donorToken",
+      "value": "",
+      "type": "string",
+      "description": "JWT token for donor user"
+    }
+  ],
+  "event": [
+    {
+      "listen": "test",
+      "script": {
+        "exec": [
+          "// Basic test to verify successful response",
+          "pm.test(\"Status code is 200\", function () {",
+          "    pm.response.to.have.status(200);",
+          "});",
+          "",
+          "// For error responses",
+          "pm.test(\"Error response has message\", function() {",
+          "    if (pm.response.code >= 400) {",
+          "        pm.expect(pm.response.json()).to.have.property('message');",
+          "    }",
+          "});"
+        ],
+        "type": "text/javascript"
+      }
+    }
+  ]
+}

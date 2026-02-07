@@ -51,12 +51,9 @@ public class Donor {
     @OneToMany(mappedBy = "donor")
     private List<Notification> notifications;
 
-    // One Donor → Allocation usage tracking
-    @OneToMany(mappedBy = "donor")
-    private List<DonorAllocationShare> allocationShares;
-
-    @ManyToOne
-    @JoinColumn(name = "auth_user_id", nullable = false)
+    // One Donor → One AuthUser
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "auth_user_id", nullable = false, unique = true)
     private AuthUser authUser;
      
 }

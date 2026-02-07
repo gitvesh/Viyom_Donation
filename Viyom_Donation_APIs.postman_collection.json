@@ -1,0 +1,524 @@
+{
+	"info": {
+		"_postman_id": "v1om-donation-apis",
+		"name": "Viyom Donation APIs",
+		"description": "Complete API collection for Viyom Donation Platform - Allocation, Beneficiary, Sector, Pool, and Reporting APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Allocation APIs",
+			"item": [
+				{
+					"name": "Get All Allocations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/allocations?page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "allocations"],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Allocation by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/allocations/{{allocation_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "allocations", "{{allocation_id}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Allocations by Beneficiary ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/allocations/beneficiary/{{beneficiary_id}}?page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "allocations", "beneficiary", "{{beneficiary_id}}"],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Allocations by Pool ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/allocations/pool/{{pool_id}}?page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "allocations", "pool", "{{pool_id}}"],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Beneficiary APIs",
+			"item": [
+				{
+					"name": "Add Beneficiary (Admin Only)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe Foundation\",\n  \"beneficiaryType\": \"INDIVIDUAL\",\n  \"description\": \"Educational foundation for underprivileged children\",\n  \"contactDetails\": \"+91-987654321, john@foundation.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/beneficiaries",
+							"host": ["{{base_url}}"],
+							"path": ["api", "beneficiaries"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Beneficiaries",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/beneficiaries?page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "beneficiaries"],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Beneficiary by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/beneficiaries/{{beneficiary_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "beneficiaries", "{{beneficiary_id}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deactivate Beneficiary (Admin Only)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/beneficiaries/{{beneficiary_id}}/deactivate",
+							"host": ["{{base_url}}"],
+							"path": ["api", "beneficiaries", "{{beneficiary_id}}", "deactivate"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sector APIs",
+			"item": [
+				{
+	"name": "Add Sector (Admin Only)",
+	"request": {
+		"method": "POST",
+		"header": [
+			{
+				"key": "Authorization",
+				"value": "Bearer {{admin_token}}",
+				"type": "text"
+			},
+			{
+				"key": "Content-Type",
+				"value": "application/json"
+			}
+		],
+		"body": {
+			"mode": "raw",
+			"raw": "{\n  \"name\": \"Education\",\n  \"description\": \"Educational support programs\",\n  \"organization\": {\n    \"organizationId\": 1\n  }\n}",
+			"options": {
+				"raw": {
+					"language": "json"
+				}
+			}
+		},
+		"url": {
+			"raw": "{{base_url}}/api/sectors",
+			"host": ["{{base_url}}"],
+			"path": ["api", "sectors"]
+		}
+	},
+	"response": []
+},
+				{
+					"name": "Get All Sectors",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/sectors?page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "sectors"],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sector by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/sectors/{{sector_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "sectors", "{{sector_id}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sectors by Organization",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/sectors/organization/{{organization_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "sectors", "organization", "{{organization_id}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deactivate Sector (Admin Only)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/sectors/{{sector_id}}/deactivate",
+							"host": ["{{base_url}}"],
+							"path": ["api", "sectors", "{{sector_id}}", "deactivate"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pool APIs",
+			"item": [
+				{
+					"name": "Get All Pools",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/pools?page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pools"],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pool by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/pools/{{pool_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pools", "{{pool_id}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Active Pools",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/pools/active?page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pools", "active"],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reporting APIs",
+			"item": [
+				{
+					"name": "Beneficiary Allocation Summary",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/reports/beneficiary-summary",
+							"host": ["{{base_url}}"],
+							"path": ["api", "reports", "beneficiary-summary"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Allocation Ledger",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/reports/allocation-ledger?page=0&size=50",
+							"host": ["{{base_url}}"],
+							"path": ["api", "reports", "allocation-ledger"],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pool Summary",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/reports/pool-summary?page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "reports", "pool-summary"],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "admin_token",
+			"value": "your_jwt_token_here",
+			"type": "string"
+		}
+	]
+}

@@ -44,7 +44,13 @@ public class AuthUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(this.role));
+        String roleName = this.role.startsWith("ROLE_") ? this.role : "ROLE_" + this.role;
+        return List.of(new SimpleGrantedAuthority(roleName));
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
     }
 
     @Override
@@ -72,12 +78,9 @@ public class AuthUser implements UserDetails {
         return this.enabled;
     }
 
-    @OneToMany(
-            mappedBy = "authUser",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<Donor> donors = new ArrayList<>();
+    // One AuthUser → One Donor
+    @OneToOne(mappedBy = "authUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Donor donor;
 
 }
 

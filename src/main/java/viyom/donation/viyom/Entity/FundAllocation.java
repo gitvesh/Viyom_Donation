@@ -30,8 +30,22 @@ public class FundAllocation {
     @Column(nullable = false)
     private LocalDateTime allocatedAt;
 
-    @Column(nullable = false)
-    private String blockchainTxHash; // allocation recorded on blockchain
+    @Column(name = "blockchain_tx_hash")
+    private String blockchainTxHash; // To be used for blockchain integration
+
+    @Column(name = "blockchain_status")
+    private String blockchainStatus; // e.g., PENDING, CONFIRMED, FAILED
+    
+    // Explicit getters for Lombok compatibility
+    public Long getFundAllocationId() { return fundAllocationId; }
+    public BigDecimal getAllocatedAmount() { return allocatedAmount; }
+    public String getPurpose() { return purpose; }
+    public String getBlockchainTxHash() { return blockchainTxHash; }
+    public String getBlockchainStatus() { return blockchainStatus; }
+    public Beneficiary getBeneficiary() { return beneficiary; }
+    public DonationPool getDonationPool() { return donationPool; }
+    public Admin getAllocatedBy() { return allocatedBy; }
+    public LocalDateTime getAllocatedAt() { return allocatedAt; }
 
     /* ===================== RELATIONSHIPS ===================== */
 
@@ -49,8 +63,4 @@ public class FundAllocation {
     @ManyToOne
     @JoinColumn(name = "allocated_by_admin_id", nullable = false)
     private Admin allocatedBy;
-
-    // One Allocation → Many Donor Shares
-    @OneToMany(mappedBy = "fundAllocation", cascade = CascadeType.ALL)
-    private List<DonorAllocationShare> donorShares;
 }

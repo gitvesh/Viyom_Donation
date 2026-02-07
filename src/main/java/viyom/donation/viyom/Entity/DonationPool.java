@@ -38,6 +38,24 @@ public class DonationPool {
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
+    
+    // Explicit getters for Lombok compatibility
+    public Long getPoolId() { return poolId; }
+    public String getPoolCode() { return poolCode; }
+    public BigDecimal getTotalCollectedAmount() { return totalCollectedAmount; }
+    public BigDecimal getTotalAllocatedAmount() { return totalAllocatedAmount; }
+    public BigDecimal getAvailableBalance() { return availableBalance; }
+    public Boolean getActive() { return active; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    
+    // Explicit setters for Lombok compatibility
+    public void setPoolId(Long poolId) { this.poolId = poolId; }
+    public void setPoolCode(String poolCode) { this.poolCode = poolCode; }
+    public void setTotalCollectedAmount(BigDecimal totalCollectedAmount) { this.totalCollectedAmount = totalCollectedAmount; }
+    public void setTotalAllocatedAmount(BigDecimal totalAllocatedAmount) { this.totalAllocatedAmount = totalAllocatedAmount; }
+    public void setAvailableBalance(BigDecimal availableBalance) { this.availableBalance = availableBalance; }
+    public void setActive(Boolean active) { this.active = active; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
     /* ===================== RELATIONSHIPS ===================== */
 

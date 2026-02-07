@@ -30,6 +30,20 @@ public class Sector {
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
+    
+    // Explicit getters for Lombok compatibility
+    public Long getSectorId() { return sectorId; }
+    public String getName() { return name; }
+    public String getDescription() { return description; }
+    public Boolean getActive() { return active; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    
+    // Explicit setters for Lombok compatibility
+    public void setSectorId(Long sectorId) { this.sectorId = sectorId; }
+    public void setName(String name) { this.name = name; }
+    public void setDescription(String description) { this.description = description; }
+    public void setActive(Boolean active) { this.active = active; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
     /* ===================== RELATIONSHIPS ===================== */
 

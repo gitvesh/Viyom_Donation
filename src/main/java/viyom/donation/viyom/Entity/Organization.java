@@ -32,10 +32,19 @@ public class Organization {
     private String address;
 
     @Column(nullable = false)
-    private String contactEmail;
-
-    @Column(nullable = false)
     private String contactPhone;
+    
+    @Column(nullable = false)
+    private String contactEmail;
+    
+    // Explicit getters for Lombok compatibility
+    public Long getOrganizationId() { return organizationId; }
+    public String getName() { return name; }
+    public String getDescription() { return description; }
+    public String getRegistrationNumber() { return registrationNumber; }
+    public String getAddress() { return address; }
+    public String getContactEmail() { return contactEmail; }
+    public String getContactPhone() { return contactPhone; }
 
     @Column(nullable = false)
     private Boolean active;

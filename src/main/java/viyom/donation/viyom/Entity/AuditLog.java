@@ -4,6 +4,7 @@ package viyom.donation.viyom.Entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,23 +18,22 @@ public class AuditLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long auditLogId;
+    private Long id;
+
+    @Column(name = "admin_id", nullable = false)
+    private Long adminId;
 
     @Column(nullable = false)
-    private String action; 
-    // CREATE_POOL / ALLOCATE_FUNDS / GENERATE_REPORT
+    private String action; // e.g., FUND_ALLOCATED
 
-    @Column(nullable = false, length = 1000)
-    private String description;
+    @Column(precision = 15, scale = 2)
+    private BigDecimal amount;
+
+    private Long beneficiaryId;
+
+    private Long poolId;
 
     @Column(nullable = false)
-    private LocalDateTime actionTime;
-
-    /* ===================== RELATIONSHIPS ===================== */
-
-    // Many Audit Logs → One Admin
-    @ManyToOne
-    @JoinColumn(name = "admin_id", nullable = false)
-    private Admin admin;
+    private LocalDateTime timestamp;
 }
 
