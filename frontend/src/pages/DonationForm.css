@@ -1,0 +1,166 @@
+.donation-form-page {
+  flex: 1;
+  padding: 4rem 0;
+  background-color: #f9fafb;
+}
+
+.donation-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.donation-container h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #111827;
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 2rem;
+  font-size: 1.125rem;
+}
+
+.donation-form-card {
+  background-color: white;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.form-section {
+  margin-bottom: 2.5rem;
+}
+
+.form-section h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #111827;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #374151;
+}
+
+.amount-input {
+  display: flex;
+  align-items: center;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.amount-input .currency {
+  padding: 0.75rem 1rem;
+  background-color: #f3f4f6;
+  border-right: 2px solid #e5e7eb;
+  font-weight: 600;
+  color: #374151;
+}
+
+.amount-input input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  font-size: 1.125rem;
+  font-weight: 600;
+  outline: none;
+}
+
+.input-with-icon {
+  display: flex;
+  align-items: center;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.input-with-icon .icon {
+  padding: 0.75rem 1rem;
+  background-color: #f3f4f6;
+  border-right: 2px solid #e5e7eb;
+  font-size: 1.25rem;
+}
+
+.input-with-icon input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+}
+
+.input-with-icon input:focus {
+  background-color: #f9fafb;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.checkbox-group label {
+  margin: 0;
+  cursor: pointer;
+}
+
+.form-group small {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.security-message {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background-color: #ecfdf5;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  color: #065f46;
+}
+
+.check-icon {
+  font-size: 1.25rem;
+  color: #10b981;
+  font-weight: 700;
+}
+
+.btn-submit {
+  width: 100%;
+  background-color: #2563eb;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-submit:hover {
+  background-color: #1e40af;
+}
+

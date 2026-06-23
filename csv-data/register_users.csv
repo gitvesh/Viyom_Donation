@@ -1,0 +1,25 @@
+name,email,password,role
+Test User 1,testuser1@viyom.com,Test@123,ROLE_DONOR
+Test User 2,testuser2@viyom.com,Test@123,ROLE_DONOR
+Test User 3,testuser3@viyom.com,Test@123,ROLE_DONOR
+Test User 4,testuser4@viyom.com,Test@123,ROLE_DONOR
+Test User 5,testuser5@viyom.com,Test@123,ROLE_DONOR
+Test User 6,testuser6@viyom.com,Test@123,ROLE_DONOR
+Test User 7,testuser7@viyom.com,Test@123,ROLE_DONOR
+Test User 8,testuser8@viyom.com,Test@123,ROLE_DONOR
+Test User 9,testuser9@viyom.com,Test@123,ROLE_DONOR
+Test User 10,testuser10@viyom.com,Test@123,ROLE_DONOR
+Test User 11,testuser11@viyom.com,Test@123,ROLE_DONOR
+Test User 12,testuser12@viyom.com,Test@123,ROLE_DONOR
+Test User 13,testuser13@viyom.com,Test@123,ROLE_DONOR
+Test User 14,testuser14@viyom.com,Test@123,ROLE_DONOR
+Test User 15,testuser15@viyom.com,Test@123,ROLE_DONOR
+Test User 16,testuser16@viyom.com,Test@123,ROLE_DONOR
+Test User 17,testuser17@viyom.com,Test@123,ROLE_DONOR
+Test User 18,testuser18@viyom.com,Test@123,ROLE_DONOR
+Test User 19,testuser19@viyom.com,Test@123,ROLE_DONOR
+Test User 20,testuser20@viyom.com,Test@123,ROLE_DONOR
+Test User 21,testuser21@viyom.com,Test@123,ROLE_DONOR
+Test User 22,testuser22@viyom.com,Test@123,ROLE_DONOR
+Test User 23,testuser23@viyom.com,Test@123,ROLE_DONOR
+Test User 24,testuser24@viyom.com,Test@123,ROLE_DONOR

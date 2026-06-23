@@ -1,0 +1,8 @@
+{
+  "network": "matic-amoy",
+  "chainId": "80002",
+  "contractAddress": "0xC50E1D5608b2d861d3eDD0aC887d529434B9eC02",
+  "deployerAddress": "0x601485FdABC06C7aE51C7B4dea982512771D0a26",
+  "deployedAt": "2026-03-21T06:55:20.716Z",
+  "transactionHash": "0xcac75fb92efe636bb61ff15039df18543538fc71eb8ffb93cef3d99a92056fff"
+}
