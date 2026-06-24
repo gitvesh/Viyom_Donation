@@ -13,8 +13,9 @@ import java.util.Collections;
 @Slf4j
 public class WhatsAppService {
 
-    @Value("${twilio.whatsapp.from}")
+    @Value("${twilio.whatsapp.from:}")
     private String fromNumber;
+
 
     /**
      * Sends a rich free-form WhatsApp message, optionally with media (PDF/Images).

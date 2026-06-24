@@ -10,11 +10,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class TwilioConfig {
 
-    @Value("${twilio.account.sid}")
+    @Value("${twilio.account.sid:}")
     private String accountSid;
 
-    @Value("${twilio.auth.token}")
+    @Value("${twilio.auth.token:}")
     private String authToken;
+
 
     @PostConstruct
     public void setupTwilio() {

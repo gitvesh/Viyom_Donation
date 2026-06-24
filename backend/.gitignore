@@ -32,5 +32,6 @@ build/
 ### VS Code ###
 .vscode/
 
-# Application secrets
-/src/main/resources/application.properties
+# Application secrets (DO NOT ignore application.properties - it uses env var substitution)
+# application.properties uses ${ENV_VAR:default} syntax - safe to commit
+

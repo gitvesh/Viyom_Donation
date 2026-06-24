@@ -1,6 +1,7 @@
 package viyom.donation.viyom.Security;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,6 +30,8 @@ public class SecurityConfig {
 
     private static final String[] PUBLIC_URLS = {
         "/api/auth/**",
+        "/api/health",
+        "/api/ping",
         "/api/sectors/**",
         "/api/pools/**",
         "/api/beneficiaries/**",
@@ -36,6 +39,7 @@ public class SecurityConfig {
         "/api/blockchain/verify/**",
         "/api/blockchain/donation/*/exists",
         "/api/blockchain/donations/total",
+        "/actuator/**",
         "/v3/api-docs/**",
         "/swagger-resources/**",
         "/swagger-ui/**",
@@ -45,6 +49,10 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserDetailsService userDetailsService;
+
+    // Safe default prevents NullPointerException when env var is not set
+    @Value("${cors.allowed.origins:http://localhost:3000}")
+    private String corsAllowedOrigins;
 
     public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter, @Qualifier("securityUserDetailsService") UserDetailsService userDetailsService) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
@@ -56,7 +64,7 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .sessionManagement(session -> 
+            .sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
             .authorizeHttpRequests(auth -> auth
@@ -81,11 +89,16 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList(System.getenv("CORS_ALLOWED_ORIGINS").split(",")));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        // Use @Value-injected field (safe default prevents NPE if env var is absent)
+        String origins = (corsAllowedOrigins != null && !corsAllowedOrigins.isBlank())
+                ? corsAllowedOrigins
+                : "http://localhost:3000";
+        configuration.setAllowedOrigins(Arrays.asList(origins.split(",")));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
         configuration.setExposedHeaders(Arrays.asList("Authorization"));
-        
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
