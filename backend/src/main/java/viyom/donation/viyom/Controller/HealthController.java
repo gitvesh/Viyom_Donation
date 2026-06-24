@@ -11,11 +11,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api")
 @CrossOrigin(origins = "*")
 public class HealthController {
 
-    @GetMapping("/health")
+    /**
+     * Root endpoint - required for Render's default health check (probes '/')
+     * Full URL with context-path: GET /viyom/
+     */
+    @GetMapping("/")
+    public ResponseEntity<Map<String, Object>> root() {
+        Map<String, Object> health = new HashMap<>();
+        health.put("status", "UP");
+        health.put("service", "Viyom Donation Backend");
+        health.put("version", "1.0.0");
+        return ResponseEntity.ok(health);
+    }
+
+    /**
+     * Detailed health check endpoint.
+     * Full URL with context-path: GET /viyom/api/health
+     */
+    @GetMapping("/api/health")
     public ResponseEntity<Map<String, Object>> health() {
         Map<String, Object> health = new HashMap<>();
         health.put("status", "UP");
@@ -25,7 +41,11 @@ public class HealthController {
         return ResponseEntity.ok(health);
     }
 
-    @GetMapping("/ping")
+    /**
+     * Simple ping endpoint.
+     * Full URL with context-path: GET /viyom/api/ping
+     */
+    @GetMapping("/api/ping")
     public ResponseEntity<String> ping() {
         return ResponseEntity.ok("pong");
     }
