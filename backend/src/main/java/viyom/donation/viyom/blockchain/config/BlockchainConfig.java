@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.lang.Nullable;
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
@@ -23,8 +24,12 @@ import java.math.BigInteger;
  *   - If the RPC is unreachable at startup, the app still starts (blockchain disabled).
  *   - If the contract address or private key is missing/invalid, blockchain transactions
  *     are disabled but the rest of the application continues to function normally.
+ *
+ * All beans are @Lazy so they don't block Spring Boot startup.
+ * Blockchain connects on first use, allowing Render's health check to pass quickly.
  */
 @Configuration
+@Lazy
 @Slf4j
 public class BlockchainConfig {
 

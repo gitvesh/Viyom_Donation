@@ -41,10 +41,13 @@ public class DonationService {
     private final AuthService authService;
     private final MilestoneService milestoneService;
     private final NotificationService notificationService;
-    private final BlockchainService blockchainService;
     private final viyom.donation.viyom.Repository.PaymentTransactionRepository paymentTransactionRepository;
     private final TemplateService templateService;
     private final viyom.donation.viyom.notification.twilio.WhatsAppService whatsAppService;
+
+    @Autowired
+    @Lazy
+    private BlockchainService blockchainService;
 
     @Autowired
     @Lazy

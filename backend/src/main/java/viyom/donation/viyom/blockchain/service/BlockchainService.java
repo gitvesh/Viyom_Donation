@@ -2,6 +2,7 @@ package viyom.donation.viyom.blockchain.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import viyom.donation.viyom.blockchain.contract.DonationTransparency;
@@ -28,6 +29,7 @@ import java.util.concurrent.CompletionException;
  *   returns null – the database record is always the source of truth.
  */
 @Service
+@Lazy
 @Slf4j
 public class BlockchainService {
 

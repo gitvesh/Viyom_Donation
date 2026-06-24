@@ -14,13 +14,14 @@ import java.math.BigDecimal;
  * This ensures that @Async proxying works correctly (avoiding self-invocation issues).
  */
 @Service
+@Lazy
 @Slf4j
 public class AllocationBlockchainAsyncService {
 
     private final BlockchainService blockchainService;
     private final FundAllocationService fundAllocationService;
 
-    public AllocationBlockchainAsyncService(BlockchainService blockchainService, @Lazy FundAllocationService fundAllocationService) {
+    public AllocationBlockchainAsyncService(@Lazy BlockchainService blockchainService, @Lazy FundAllocationService fundAllocationService) {
         this.blockchainService = blockchainService;
         this.fundAllocationService = fundAllocationService;
     }
