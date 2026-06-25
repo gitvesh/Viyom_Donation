@@ -1,5 +1,13 @@
 // API Configuration and Service
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || process.env.REACT_APP_API_URL || 'http://localhost:8080/viyom/api';
+const getApiBaseUrl = () => {
+  const url = process.env.REACT_APP_API_BASE_URL || process.env.REACT_APP_API_URL;
+  if (!url || url === 'undefined' || url === 'null' || url.trim() === '') {
+    console.warn('Warning: REACT_APP_API_BASE_URL environment variable is not set. Defaulting to localhost.');
+    return 'http://localhost:8080/viyom/api';
+  }
+  return url;
+};
+const API_BASE_URL = getApiBaseUrl();
 
 // Helper function to get auth token
 const getAuthToken = () => {
