@@ -6,6 +6,11 @@ const getApiBaseUrl = () => {
     return 'http://localhost:8080/viyom/api';
   }
   
+  // Fix common typos in the URL (e.g., missing slash between onrender.com and viyom)
+  if (url.includes('.onrender.comviyom')) {
+    url = url.replace('.onrender.comviyom', '.onrender.com/viyom');
+  }
+  
   // Clean trailing slashes
   url = url.replace(/\/+$/, '');
   
