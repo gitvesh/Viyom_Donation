@@ -1,10 +1,23 @@
 // API Configuration and Service
 const getApiBaseUrl = () => {
-  const url = process.env.REACT_APP_API_BASE_URL || process.env.REACT_APP_API_URL;
+  let url = process.env.REACT_APP_API_BASE_URL || process.env.REACT_APP_API_URL;
   if (!url || url === 'undefined' || url === 'null' || url.trim() === '') {
     console.warn('Warning: REACT_APP_API_BASE_URL environment variable is not set. Defaulting to localhost.');
     return 'http://localhost:8080/viyom/api';
   }
+  
+  // Clean trailing slashes
+  url = url.replace(/\/+$/, '');
+  
+  // If it's a remote production URL (starts with http, not localhost) and lacks context path, append it automatically
+  if (url.startsWith('http') && !url.includes('localhost') && !url.endsWith('/viyom/api')) {
+    if (url.endsWith('/viyom')) {
+      url = `${url}/api`;
+    } else {
+      url = `${url}/viyom/api`;
+    }
+  }
+  
   return url;
 };
 const API_BASE_URL = getApiBaseUrl();
