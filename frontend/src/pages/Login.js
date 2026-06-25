@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
@@ -18,6 +18,29 @@ const Login = () => {
   // Get redirect info from location state
   const redirectMessage = location.state?.message;
   const redirectFrom = location.state?.from;
+
+  const handleGoogleSignIn = useCallback(async (response) => {
+    try {
+      console.log('Google Sign-In response:', response);
+      // Here you would send the credential to your backend
+      // For now, we'll simulate a successful login
+      
+      // Decode the JWT token to get user info
+      const userInfo = JSON.parse(atob(response.credential.split('.')[1]));
+      console.log('User info:', userInfo);
+      
+      // Simulate login with Google account
+      await login(userInfo.email, 'google-oauth-' + userInfo.sub);
+      
+      if (redirectFrom) {
+        navigate(redirectFrom);
+      } else {
+        navigate('/dashboard');
+      }
+    } catch (err) {
+      console.error('Google Sign-In failed:', err);
+    }
+  }, [login, navigate, redirectFrom]);
 
   // Initialize Google Sign-In
   useEffect(() => {
@@ -51,29 +74,6 @@ const Login = () => {
       }
     };
   }, [handleGoogleSignIn]);
-
-  const handleGoogleSignIn = async (response) => {
-    try {
-      console.log('Google Sign-In response:', response);
-      // Here you would send the credential to your backend
-      // For now, we'll simulate a successful login
-      
-      // Decode the JWT token to get user info
-      const userInfo = JSON.parse(atob(response.credential.split('.')[1]));
-      console.log('User info:', userInfo);
-      
-      // Simulate login with Google account
-      await login(userInfo.email, 'google-oauth-' + userInfo.sub);
-      
-      if (redirectFrom) {
-        navigate(redirectFrom);
-      } else {
-        navigate('/dashboard');
-      }
-    } catch (err) {
-      console.error('Google Sign-In failed:', err);
-    }
-  };
 
   const handleGoogleButtonClick = () => {
     const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;

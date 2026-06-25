@@ -74,10 +74,6 @@ const Dashboard = () => {
   };
 
 
-    };
-    return colors[sectorName] || colors.default;
-  };
-
   return (
     <div className="flex-1 overflow-hidden">
       {/* Hero Section with Animated Background */}
