@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { donationAPI, poolAPI, sectorAPI } from '../services/api';
+import { poolAPI, sectorAPI } from '../services/api';
 
 const Home = () => {
   const [scrollY, setScrollY] = useState(0);

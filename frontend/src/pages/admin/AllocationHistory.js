@@ -86,15 +86,6 @@ const AllocationHistory = () => {
     return date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
   };
 
-  const getPoolName = (poolId) => {
-    const pool = pools.find(p => p.poolId === poolId);
-    return pool ? pool.poolCode : `Pool #${poolId}`;
-  };
-
-  const getBeneficiaryName = (beneficiaryId) => {
-    const beneficiary = beneficiaries.find(b => b.beneficiaryId === beneficiaryId);
-    return beneficiary ? beneficiary.name : `Beneficiary #${beneficiaryId}`;
-  };
 
   return (
     <AdminLayout>

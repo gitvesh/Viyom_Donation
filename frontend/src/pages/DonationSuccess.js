@@ -5,7 +5,7 @@ import jsPDF from 'jspdf';
 const DonationSuccess = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { amount, paymentId, donationId, sector, orderId, verified, verificationError, blockchainTxnHash, message } = location.state || {};
+  const { amount, paymentId, donationId, sector, orderId, verificationError, blockchainTxnHash, message } = location.state || {};
 
   // Prevent direct access without proper payment data
   useEffect(() => {

@@ -6,7 +6,6 @@ const PaymentProcessing = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 
   const donationData = location.state || JSON.parse(localStorage.getItem('donationData') || '{}');

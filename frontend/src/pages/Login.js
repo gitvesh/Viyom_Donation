@@ -14,7 +14,6 @@ const Login = () => {
   });
   const [isAdmin, setIsAdmin] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [loginError, setLoginError] = useState(null);
 
   // Get redirect info from location state
   const redirectMessage = location.state?.message;
@@ -51,7 +50,7 @@ const Login = () => {
         document.body.removeChild(script);
       }
     };
-  }, []);
+  }, [handleGoogleSignIn]);
 
   const handleGoogleSignIn = async (response) => {
     try {

@@ -73,13 +73,7 @@ const Dashboard = () => {
     return `${Math.floor(diffDays / 30)} months ago`;
   };
 
-  const getSectorColor = (sectorName) => {
-    const colors = {
-      'Education': { from: 'emerald-500', to: 'emerald-600', shadow: 'emerald-500/30' },
-      'Healthcare': { from: 'blue-500', to: 'blue-600', shadow: 'blue-500/30' },
-      'Environment': { from: 'green-500', to: 'green-600', shadow: 'green-500/30' },
-      'Water': { from: 'cyan-500', to: 'cyan-600', shadow: 'cyan-500/30' },
-      'default': { from: 'orange-500', to: 'orange-600', shadow: 'orange-500/30' }
+
     };
     return colors[sectorName] || colors.default;
   };

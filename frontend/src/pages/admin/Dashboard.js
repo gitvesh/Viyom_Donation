@@ -22,7 +22,7 @@ const AdminDashboard = () => {
     try {
       setLoading(true);
       
-      const [donations, allocations, pools, beneficiaries, sectors] = await Promise.all([
+      const [donations, allocations, pools, , sectors] = await Promise.all([
         donationAPI.getAllDonations(),
         allocationAPI.getHistory(0, 100),
         poolAPI.getAll(0, 100),
@@ -90,16 +90,6 @@ const AdminDashboard = () => {
     }
   };
 
-  const formatDate = (dateString) => {
-    if (!dateString) return 'N/A';
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-IN', { year: 'numeric', month: '2-digit', day: '2-digit' });
-  };
-
-  const getSectorColor = (index) => {
-    const colors = ['bg-red-500', 'bg-green-500', 'bg-yellow-500', 'bg-teal-500', 'bg-blue-500', 'bg-purple-500', 'bg-pink-500', 'bg-orange-500'];
-    return colors[index % colors.length];
-  };
 
   return (
     <AdminLayout>

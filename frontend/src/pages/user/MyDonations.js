@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { donationAPI } from '../../services/api';
 
@@ -16,18 +16,10 @@ const MyDonations = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [sectors, setSectors] = useState([]);
-  const [scrollY, setScrollY] = useState(0);
-  const cardsRef = useRef([]);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   // Fetch donations on component mount
   useEffect(() => {
     fetchDonations();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Extract unique sectors from donations

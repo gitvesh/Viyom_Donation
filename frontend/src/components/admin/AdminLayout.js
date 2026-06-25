@@ -221,9 +221,9 @@ const AdminLayout = ({ children }) => {
       <footer className="fixed bottom-0 left-72 right-0 bg-white/80 backdrop-blur-xl py-3 border-t border-gray-200/50 z-30">
         <div className="max-w-[1600px] mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-2 text-xs text-gray-600">
           <div className="flex gap-6" style={{ fontFamily: "'Inter', sans-serif" }}>
-            <a href="#" className="hover:text-blue-600 transition-colors">Terms</a>
-            <a href="#" className="hover:text-blue-600 transition-colors">Privacy</a>
-            <a href="#" className="hover:text-blue-600 transition-colors">Cookies</a>
+            <button onClick={() => {}} className="hover:text-blue-600 transition-colors bg-transparent border-none cursor-pointer p-0 text-xs">Terms</button>
+            <button onClick={() => {}} className="hover:text-blue-600 transition-colors bg-transparent border-none cursor-pointer p-0 text-xs">Privacy</button>
+            <button onClick={() => {}} className="hover:text-blue-600 transition-colors bg-transparent border-none cursor-pointer p-0 text-xs">Cookies</button>
           </div>
           <span className="font-medium" style={{ fontFamily: "'Inter', sans-serif" }}>
             © 2026 Viyom. All rights reserved.
