@@ -1,5 +1,5 @@
 // API Configuration and Service
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || process.env.REACT_APP_API_URL || 'http://localhost:8080/viyom/api';
 
 // Helper function to get auth token
 const getAuthToken = () => {
